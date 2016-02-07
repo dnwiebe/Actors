@@ -13,7 +13,7 @@ object Utils {
   val WIDTH = 1000
   val HEIGHT = 1000
   val GENERATIONS = 1000
-  val MULTIPATCHES = 12
+  val MULTIPATCHES = 4
   val MANYPATCHES = 1000
   val INITIAL_DENSITY = 0.33333
   implicit val TIMEOUT = Timeout (1 hour)

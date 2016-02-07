@@ -16,6 +16,11 @@ import scala.concurrent.{Await, Future}
 
 // 12-core 3.2GHz machine: ==== TIME FOR 12 PATCHES: 17627ms
 // Notes: All cores went to 75% utilization; total memory commitment was not perceptibly affected.
+// 4-core 1.4GHz machine: ==== TIME FOR 4 PATCHES: 76766ms
+//
+// CLOCK  CORES   CAPABILITY  PERCENT   TIME    1/PERCENT SPEEDUP
+// 3.2GHz 12      38.4        100       17627   100       8.1
+// 1.4GHz 4        5.6         15       76766   23        3.7
 
 class MultiPatch extends FlatSpec {
   PatchHandler.system = ActorSystem ()

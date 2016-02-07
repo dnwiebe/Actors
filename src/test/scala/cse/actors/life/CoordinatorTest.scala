@@ -15,10 +15,11 @@ import scala.collection.mutable.ListBuffer
 class CoordinatorTest (system: ActorSystem) extends TestKit (system) with ImplicitSender with path.FunSpecLike {
 
   def this () = this (ActorSystem ())
+  implicit val isystem = system
 
   describe ("A Coordinator with a mocked factory") {
     val factory = mock (classOf[PatchHandlerFactory])
-    val subject = Coordinator (factory)(system)
+    val subject = Coordinator (factory)
 
     describe ("given a 120x180 LifeGrid and directed to run 2 generations with 12 patches") {
       implicit val isystem = system

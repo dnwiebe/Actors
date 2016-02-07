@@ -60,6 +60,19 @@ class Coordinator (factory: PatchHandlerFactory) extends Actor {
     startNextGeneration ()
   }
 
+  private def handleComplete (): Unit = {
+    runningPatchHandlers.remove (sender)
+    if (runningPatchHandlers.nonEmpty) {return}
+    handleCompletedGeneration ()
+    generationsToGo -= 1
+    if (generationsToGo == 0) {
+      client ! Finished ()
+    }
+    else {
+      startNextGeneration ()
+    }
+  }
+
   private def startNextGeneration (): Unit = {
     runningPatchHandlers.clear ()
     allPatchHandlers.foreach {handler =>
@@ -68,21 +81,7 @@ class Coordinator (factory: PatchHandlerFactory) extends Actor {
     }
   }
 
-  private def handleComplete (): Unit = {
-    runningPatchHandlers.remove (sender)
-    if (runningPatchHandlers.isEmpty) {
-      handleCompletedGeneration ()
-      generationsToGo -= 1
-      if (generationsToGo == 0) {
-        client ! Finished ()
-      }
-      else {
-        startNextGeneration ()
-      }
-    }
-  }
-
   private def handleCompletedGeneration (): Unit = {
-
+    // Could put something here: show frame on screen, dump to offline animation, etc.
   }
 }
